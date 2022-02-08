@@ -5,9 +5,13 @@ import json
 from requests_aws4auth import AWS4Auth
 from opensearchpy import OpenSearch, RequestsHttpConnection
 
-endpoint = 'vpc-domain-wy-2-cl6ab5oy3cvfnavcz6yl4z5qie.ap-southeast-1.es.amazonaws.com'  # the proxy endpoint, including https://
+#input these parameters
+endpoint = '***.ap-southeast-1.es.amazonaws.com'  # the proxy endpoint, including https://
 region = 'ap-southeast-1'  # e.g. us-west-1
 index = 'log-wy'  # index name
+bucketName = "***"  # s3 bucket name
+objectKey = "news/sample.json"  # s3 object
+
 service = 'es'
 credentials = boto3.Session().get_credentials()
 awsauth = AWS4Auth(credentials.access_key, credentials.secret_key,
@@ -49,14 +53,14 @@ eventDemo = {
                 "s3SchemaVersion": "1.0",
                 "configurationId": "828aa6fc-f7b5-4305-8584-487c791949c1",
                 "bucket": {
-                    "name": "lab-519201465192-sin-com",
+                    "name": bucketName,
                     "ownerIdentity": {
                         "principalId": "A3I5XTEXAMAI3E"
                     },
                     "arn": "arn:aws:s3:::lambda-artifacts-deafc19498e3f2df"
                 },
                 "object": {
-                    "key": "news/sample.json",
+                    "key": objectKey,
                     "size": 1305107,
                     "eTag": "b21b84d653bb07b05b1e6b33684dc11b",
                     "sequencer": "0C0F6F405D6ED209E1"
@@ -72,6 +76,10 @@ documentDemo = {
     "director": "Bennett Miller",
     "year": "2011"
 }
+
+#simple test
+#search.index(index="movies", doc_type="_doc", id="1", body=documentDemo)
+
 # Lambda execution starts here
 def handler(event, context):
     for record in event['Records']:
