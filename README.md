@@ -1,8 +1,6 @@
 # OpenSearch-Example
 
-s3 to OpenSearch demo
-
-s3-to-Opensearch2.py can upload a s3 object file to OpenSearch.
+s3 to OpenSearch demo can upload a s3 object file to OpenSearch.
 
 1、setup cloud9 , using aws configure to set the AK and SK
 
@@ -25,9 +23,13 @@ pip install requests-aws4auth
 modify s3-to-Opensearch2.py input parameters including 
 
 endpoint = '***.ap-southeast-1.es.amazonaws.com'  # the proxy endpoint, including https://
+
 region = 'ap-southeast-1'  # e.g. us-west-1
+
 index = '***'  # index name
+
 bucketName = "***"  #s3 bucket
+
 objectKey = "news/sample.json"   #s3 object
 
 6、run the python script
